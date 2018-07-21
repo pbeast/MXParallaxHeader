@@ -218,7 +218,7 @@ static void * const kMXParallaxHeaderKVOContext = (void*)&kMXParallaxHeaderKVOCo
     CGFloat relativeHeight  = -relativeYOffset;
     
     CGRect frame = (CGRect){
-        .origin.x       = 0,
+        .origin.x       = -1 * self.scrollView.contentInset.left,
         .origin.y       = relativeYOffset,
         .size.width     = self.scrollView.frame.size.width,
         .size.height    = MAX(relativeHeight, minimumHeight)
@@ -236,6 +236,7 @@ static void * const kMXParallaxHeaderKVOContext = (void*)&kMXParallaxHeaderKVOCo
     //Adjust content offset
     CGPoint offset = self.scrollView.contentOffset;
     offset.y += inset.top - top;
+    offset.x = 0
     self.scrollView.contentOffset = offset;
     
     //Adjust content inset
