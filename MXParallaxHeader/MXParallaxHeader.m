@@ -236,7 +236,7 @@ static void * const kMXParallaxHeaderKVOContext = (void*)&kMXParallaxHeaderKVOCo
     //Adjust content offset
     CGPoint offset = self.scrollView.contentOffset;
     offset.y += inset.top - top;
-    offset.x = 0
+    offset.x = 0;
     self.scrollView.contentOffset = offset;
     
     //Adjust content inset
