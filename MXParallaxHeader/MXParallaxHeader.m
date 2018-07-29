@@ -217,11 +217,22 @@ static void * const kMXParallaxHeaderKVOContext = (void*)&kMXParallaxHeaderKVOCo
     CGFloat relativeYOffset = self.scrollView.contentOffset.y + self.scrollView.contentInset.top - self.height;
     CGFloat relativeHeight  = -relativeYOffset;
     
+    CGFloat topPadding = 0;
+    if (self.minimumHeight == self.height){
+        topPadding = 20;
+        if([[UIDevice currentDevice]userInterfaceIdiom]==UIUserInterfaceIdiomPhone && (int)[[UIScreen mainScreen] nativeBounds].size.height == 2436) {
+            if (@available(iOS 11.0, *)) {
+                UIWindow *window = UIApplication.sharedApplication.keyWindow;
+                topPadding = window.safeAreaInsets.top;
+            }
+        }
+    }
+    
     CGRect frame = (CGRect){
         .origin.x       = -1 * self.scrollView.contentInset.left,
         .origin.y       = relativeYOffset,
         .size.width     = self.scrollView.frame.size.width,
-        .size.height    = MAX(relativeHeight, minimumHeight)
+        .size.height    = MAX(relativeHeight, minimumHeight + topPadding)
     };
     
     self.contentView.frame = frame;
